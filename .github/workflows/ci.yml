@@ -28,6 +28,7 @@ jobs:
 
     - name: Set up Android environment
       run: |
+        sudo apt-get purge openjdk*
         sudo apt-get install -y openjdk-21-jdk
         wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
         mkdir -p cmdline-tools/latest
