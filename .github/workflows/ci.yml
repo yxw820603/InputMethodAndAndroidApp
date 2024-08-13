@@ -53,5 +53,4 @@ jobs:
 
     - name: Build Android project
       run: |
-        cd AndroidApp
         ./gradlew assembleDebug
