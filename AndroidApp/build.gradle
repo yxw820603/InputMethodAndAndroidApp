@@ -4,20 +4,31 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:8.0.2" // 使用最新的插件版本
+        classpath "com.android.tools.build:gradle:8.9"
     }
 }
 
+
 plugins {
-    id 'com.android.application'
+    id 'com.android.application' version '8.9' apply false
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+
+
 android {
-    compileSdkVersion 30
+    namespace 'com.example.androidapp'
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.example.androidapp"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

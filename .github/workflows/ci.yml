@@ -42,7 +42,7 @@ jobs:
         mv cmdline-tools/NOTICE.txt cmdline-tools/latest
         mv cmdline-tools/source.properties cmdline-tools/latest
         java --version
-        yes | cmdline-tools/latest/bin/sdkmanager "platforms;android-30" "build-tools;30.0.3"
+        yes | cmdline-tools/latest/bin/sdkmanager "platforms;android-33" "build-tools;33.0.2" "cmdline-tools;latest"
 
     - name: Build Android project
       run: |
