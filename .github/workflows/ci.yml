@@ -26,10 +26,14 @@ jobs:
         cmake ..
         make
 
+    - name: SetupJDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '21'
+
     - name: Set up Android environment
       run: |
-        sudo apt-get purge openjdk*
-        sudo apt-get install -y openjdk-21-jdk
         wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
         mkdir -p cmdline-tools/latest
         unzip commandlinetools-linux-11076708_latest.zip
