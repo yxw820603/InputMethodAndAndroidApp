@@ -47,9 +47,11 @@ jobs:
         java --version
         yes | cmdline-tools/latest/bin/sdkmanager "platforms;android-33" "build-tools;33"
         pwd
+    - name: Set up Gradle Wrapper
+      run: |
+        gradle wrapper --gradle-version 8.9
 
     - name: Build Android project
       run: |
-        pwd
-        gradle wrapper
+        cd AndroidApp
         ./gradlew assembleDebug
