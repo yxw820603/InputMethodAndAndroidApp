@@ -36,6 +36,7 @@ jobs:
 
     - name: Set up Android environment
       run: |
+        pwd
         wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
         mkdir -p cmdline-tools/latest
         unzip commandlinetools-linux-11076708_latest.zip
