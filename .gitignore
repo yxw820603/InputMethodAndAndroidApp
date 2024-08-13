@@ -11,6 +11,8 @@ AndroidApp/build/
 # Gradle caches
 .gradle/
 *.gradle
+!build.gradle
+!settings.gradle
 
 # IDE files
 .idea/
