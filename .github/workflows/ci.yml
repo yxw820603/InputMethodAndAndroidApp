@@ -16,7 +16,7 @@ jobs:
     - name: Set up C++ environment
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake
+        sudo apt-get install -y build-essential cmake -q
 
     - name: Build C++ project
       run: |
@@ -37,7 +37,7 @@ jobs:
     - name: Set up Android environment
       run: |
         pwd
-        wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+        wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -nv
         mkdir -p cmdline-tools/latest
         unzip commandlinetools-linux-11076708_latest.zip
         mv cmdline-tools/bin cmdline-tools/latest
@@ -45,7 +45,7 @@ jobs:
         mv cmdline-tools/NOTICE.txt cmdline-tools/latest
         mv cmdline-tools/source.properties cmdline-tools/latest
         java --version
-        yes | cmdline-tools/latest/bin/sdkmanager "platforms;android-33" "build-tools;33"
+        yes | cmdline-tools/latest/bin/sdkmanager "platforms;android-33" "build-tools;33.0.0"
         pwd
     - name: Set up Gradle Wrapper
       run: |
