@@ -34,11 +34,19 @@ jobs:
         distribution: 'temurin'
         java-version: '21'
 
+    - name: Setup Android SDK
+      uses: Swisyn/setup-android-sdk@v1
+
     - name: Set up Android SDK
-      uses: reactivecircus/android-sdk-action@v3
+      uses: android-actions/setup-android@v1
       with:
-        api-level: 33
-        build-tools: 33.0.0
+        sdk-version: '33'
+        build-tools-version: '33.0.0'
+        ndk-version: '25.2.0'
+
+    - name: Grant Execute Permission for Gradlew
+      run: chmod +x ./AndroidApp/gradlew
 
     - name: Build with Gradle
-      run: ./AndroidApp/gradlew -p AndroidApp build
+      working-directory: ./AndroidApp
+      run: ./gradlew build
