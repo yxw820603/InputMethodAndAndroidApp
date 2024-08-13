@@ -1,11 +1,23 @@
-apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.0.2" // 使用最新的插件版本
+    }
+}
+
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.example.androidapp"
         minSdkVersion 16
-        targetSdkVersion 33
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
