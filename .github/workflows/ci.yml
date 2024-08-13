@@ -20,11 +20,13 @@ jobs:
 
     - name: Build C++ project
       run: |
+        pwd
         cd InputMethod
         mkdir -p build
         cd build
         cmake ..
         make
+        pwd
 
     - name: SetupJDK
       uses: actions/setup-java@v4
@@ -42,9 +44,11 @@ jobs:
         mv cmdline-tools/NOTICE.txt cmdline-tools/latest
         mv cmdline-tools/source.properties cmdline-tools/latest
         java --version
-        yes | cmdline-tools/latest/bin/sdkmanager "platforms;android-33" "build-tools;33.0.2" "cmdline-tools;latest"
+        yes | cmdline-tools/latest/bin/sdkmanager "platforms;android-33" "build-tools;33"
+        pwd
 
     - name: Build Android project
       run: |
+        pwd
         gradle wrapper
         ./gradlew assembleDebug
