@@ -13,13 +13,16 @@ include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cma
 
 add_subdirectory(src)
 
-include(CPack)
 
 set(CPACK_GENERATOR "DEB")
 set(CPACK_PACKAGE_NAME "UDPInput")
 set(CPACK_PACKAGE_VERSION "1.0.0")
-set(CPACK_PACKAGE_CONTACT "your-email@example.com")
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
+set(CPACK_PACKAGE_CONTACT "yxw820603@gmail.com")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "yxw820603")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "fcitx5, libfcitx5core7")
 
-set(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR}/package;UDPInput;ALL;/")
+set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
+# set(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR}/package;UDPInput;ALL;/")
+
+
+include(CPack)

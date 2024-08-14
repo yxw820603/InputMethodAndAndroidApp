@@ -18,7 +18,3 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/UDPInput-addon.conf" RENAME UDPInput.
 
 # registration file
 install(FILES "UDPInput.conf" DESTINATION "${FCITX_INSTALL_PKGDATADIR}/inputmethod")
-
-
-
-
