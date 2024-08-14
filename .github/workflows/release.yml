@@ -16,8 +16,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: UDPInput
-        path: UDPInput/build/
-        run-id: ${{ github.event.workflow_run.id }}
+
 
     - name: Set up C++ environment
       run: |
