@@ -1,17 +1,20 @@
-#include <iostream>
-#include "config.h"
-#include "status_manager.h"
-#include "udp_receiver.h"
+#include <fcitx/inputmethodengine.h>
+#include <fcitx/addonfactory.h>
 
-int main() {
-    StatusManager statusManager;
-    UdpReceiver udpReceiver;
-    statusManager.ToggleStatus();
-    if (statusManager.IsEnabled()) {
-        std::cout << "Input method enabled" << std::endl;
-        udpReceiver.startReceiving(DEFAULT_MULTICAST_ADDRESS);
-    } else {
-        std::cout << "Input method disabled" << std::endl;
+class MyInputMethod : public fcitx::InputMethodEngineV2
+{
+public:
+    void keyEvent(const fcitx::InputMethodEntry &entry, fcitx::KeyEvent &keyEvent) override{
+         FCITX_UNUSED(entry);
+        FCITX_INFO() << keyEvent.key() << " isRelease=" << keyEvent.isRelease();
     }
-    return 0;
-}
+};
+
+class MyInputMethodFactory : public fcitx::AddonFactory {
+    fcitx::AddonInstance * create(fcitx::AddonManager * manager) override {
+        FCITX_UNUSED(manager);
+        return new MyInputMethod();
+    }
+};
+
+FCITX_ADDON_FACTORY(MyInputMethodFactory);
