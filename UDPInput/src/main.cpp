@@ -19,6 +19,8 @@ private:
     std::thread th;
     bool isEnable = false;
 
+    bool mustExit = false;
+
     void loopCheck()
     {
         const int bufferSize = 1024;
@@ -28,19 +30,28 @@ private:
 
         while (true)
         {
+            if (udp == -1)
+            {
+                return;
+            }
             memset(buffer, 0, bufferSize); // 清空缓冲区
             ssize_t bytesReceived = recvfrom(this->udp, buffer, bufferSize - 1, 0,
                                              (struct sockaddr *)&senderAddr, &senderAddrLen);
             if (bytesReceived < 0)
             {
-                FCITX_ERROR() << strerror(errno);
+                FCITX_ERROR() << "=======>" << strerror(errno);
             }
             else if (bytesReceived > 0 && this->isEnable)
             {
-                //需要把buffer转换成std::string类型：
+                // 需要把buffer转换成std::string类型：
                 std::string message(buffer, bytesReceived);
                 // FCITX_WARN()<<"receive message: "<<message;
                 this->ic->commitString(message);
+            }
+
+            if (mustExit)
+            {
+                return;
             }
 
             // 暂停一段时间，避免 CPU 使用率过高
@@ -49,23 +60,9 @@ private:
     }
 
 public:
-    void keyEvent(const fcitx::InputMethodEntry &entry, fcitx::KeyEvent &keyEvent) override
+    UDPInput()
     {
-        FCITX_UNUSED(entry);
-        FCITX_INFO() << keyEvent.key() << " isRelease=" << keyEvent.isRelease();
-    }
-
-    void activate(const InputMethodEntry &entry, InputContextEvent &event) override
-    {
-        FCITX_UNUSED(entry);
-        FCITX_UNUSED(event);
-        FCITX_INFO() << "UDPInput Activate";
-
-        if (ic == nullptr)
-        {
-            this->ic = event.inputContext();
-        }
-
+        FCITX_INFO() << "UDPInput,lets start,bind udp socket and start listen thread loop";
         if (udp == -1)
         {
             udp = socket(AF_INET, SOCK_DGRAM, 0);
@@ -87,7 +84,7 @@ public:
             addr.sin_addr.s_addr = inet_addr("224.0.0.1");
             if (bind(udp, (sockaddr *)&addr, sizeof(addr)) == -1)
             {
-                FCITX_ERROR() << "bind error";
+                FCITX_ERROR() << "UDPInput ===========>" << "bind error";
                 return;
             }
         }
@@ -97,16 +94,42 @@ public:
         }
         else
         {
-            FCITX_ERROR() << "thread is running";
+            // ??应该不会走到这里吧
+            FCITX_ERROR() << "=======>" << "thread already running";
         }
+    }
+    ~UDPInput()
+    {
+        if (this->th.joinable())
+        {
+            FCITX_WARN() << "let's exit..";
+            mustExit = true;
+            this->th.join();
+            close(udp);
+        }
+    }
+    void keyEvent(const fcitx::InputMethodEntry &entry, fcitx::KeyEvent &keyEvent) override
+    {
+        FCITX_UNUSED(entry);
+        FCITX_INFO() << "test:" << keyEvent.key() << " isRelease=" << keyEvent.isRelease();
+    }
+
+    void activate(const InputMethodEntry &entry, InputContextEvent &event) override
+    {
+        FCITX_UNUSED(entry);
+        FCITX_UNUSED(event);
+        FCITX_INFO() << "UDPInput Activate";
+
+        this->ic = event.inputContext();
 
         this->isEnable = true;
     }
 
     void deactivate(const InputMethodEntry &entry, InputContextEvent &event) override
     {
-        reset(entry, event);
+        FCITX_INFO() << "UDPInput  DeActivate !!";
         this->isEnable = false;
+        reset(entry, event);
     }
 };
 

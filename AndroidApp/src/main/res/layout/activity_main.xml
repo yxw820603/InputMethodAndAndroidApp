@@ -1,26 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    
     <EditText
-        android:id="@+id/multicast_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter multicast address"
-        android:text="224.0.0.1" />
-
-    <EditText
-        android:id="@+id/multiline_text"
+        android:id="@+id/multiLineTextBox"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:hint="Multiline Text"
-        android:inputType="textMultiLine" />
-
-    <Button
-        android:id="@+id/toggle_button"
+        android:hint="Enter text here"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:scrollbars="vertical"/>
+    
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Toggle State" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            
+            <EditText
+                android:id="@+id/multicastAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Multicast Address"
+                android:text="224.0.0.1"/>
+            
+            <EditText
+                android:id="@+id/multicastPort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Port"
+                android:text="7300"/>
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Start"/>
+    </LinearLayout>
 </LinearLayout>

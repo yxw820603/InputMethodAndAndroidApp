@@ -15,3 +15,16 @@
 可以同时运行多个实例来接收相同组播地址的数据
 ```socat UDP4-RECVFROM:7300,ip-add-membership=224.0.0.1:0.0.0.0,reuseaddr -```
 
+
+好用难用的，反正能用。 ^-^
+
+编译：
+```
+rm UDPInput/build -rf
+mkdir -p UDPInput/build
+cd UDPInput/build
+cmake ..
+make
+cd ../..
+./gradlew assembleDebug
+```
