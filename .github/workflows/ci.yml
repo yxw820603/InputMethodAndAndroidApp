@@ -16,12 +16,12 @@ jobs:
     - name: Set up C++ environment
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake -q
+        sudo apt-get install -y build-essential cmake libfcitx5core-dev libfcitx5-qt-dev -q
 
     - name: Build C++ project
       run: |
         pwd
-        cd InputMethod
+        cd UDPInput
         mkdir -p build
         cd build
         cmake ..
