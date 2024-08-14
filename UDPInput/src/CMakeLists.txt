@@ -1,23 +1,23 @@
 
 # so library
-add_library(udpinput SHARED
+add_library(UDPInput SHARED
     main.cpp
 )
 
-target_link_libraries(udpinput PRIVATE Fcitx5::Core)
-set_target_properties(udpinput PROPERTIES PREFIX "")
-install(TARGETS udpinput DESTINATION "${FCITX_INSTALL_LIBDIR}/fcitx5")
+target_link_libraries(UDPInput PRIVATE Fcitx5::Core)
+set_target_properties(UDPInput PROPERTIES PREFIX "")
+install(TARGETS UDPInput DESTINATION "${FCITX_INSTALL_LIBDIR}/fcitx5")
 
 # target_include_directories(InputMethod PUBLIC fcitx5core fcitx5utils)
 
 
 
 # config file
-configure_file(udpinput-addon.conf.in udpinput-addon.conf)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/udpinput-addon.conf" RENAME udpinput.conf DESTINATION "${FCITX_INSTALL_PKGDATADIR}/addon")
+configure_file(UDPInput-addon.conf.in UDPInput-addon.conf)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/UDPInput-addon.conf" RENAME UDPInput.conf DESTINATION "${FCITX_INSTALL_PKGDATADIR}/addon")
 
 # registration file
-install(FILES "udpinput.conf" DESTINATION "${FCITX_INSTALL_PKGDATADIR}/inputmethod")
+install(FILES "UDPInput.conf" DESTINATION "${FCITX_INSTALL_PKGDATADIR}/inputmethod")
 
 
 

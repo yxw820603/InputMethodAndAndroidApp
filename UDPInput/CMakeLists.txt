@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(InputMethod)
+project(UDPInput)
 
 find_package(Fcitx5Core REQUIRED)
 find_package(Fcitx5Config REQUIRED)

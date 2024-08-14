@@ -1,8 +1,8 @@
 [Addon]
-Name=udpinput
+Name=UDPInput
 Category=InputMethod
 Version=@PROJECT_VERSION@
-Library=udpinput
+Library=UDPInput
 Type=SharedLibrary
 OnDemand=True
 Configurable=True
