@@ -30,7 +30,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Readme
-        path: Readme.md
+        path: README.md
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
