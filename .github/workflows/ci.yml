@@ -26,11 +26,15 @@ jobs:
         cd build
         cmake ..
         make
+
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: UDPInput
         path: UDPInput/build/
+    - name: List Artifacts
+      run: |
+        ls -l UDPInput/build/
 
     - name: SetupJDK
       uses: actions/setup-java@v4
