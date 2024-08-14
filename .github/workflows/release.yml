@@ -1,0 +1,37 @@
+name: Package on Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-and-package:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: build-artifact
+        path: UDPInput/build/
+
+    - name: Set up C++ environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake -q
+
+    - name: Package C++ project
+      run: |
+        cd UDPInput/build
+        cpack -G DEB
+
+    - name: Upload .deb to GitHub Release
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./UDPInput/build/UDPInput.deb
+        asset_name: UDPInput.deb
+        asset_content_type: application/octet-stream
