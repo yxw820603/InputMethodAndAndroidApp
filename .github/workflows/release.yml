@@ -1,4 +1,4 @@
-name: Package on Release
+name: CI
 
 on:
   release:
