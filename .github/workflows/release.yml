@@ -1,4 +1,4 @@
-name: CI
+name: Release
 
 on:
   release:
@@ -12,18 +12,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: DownloadReadme
-      uses: actions/download-artifact@v4
-      with:
-        github-token: ${{ secrets.GH_PAT }}
-        repository: ${{ github.repository }}
-        name: Readme
-
     - name: Download Build Artifacts
       uses: actions/download-artifact@v4
       with:
         github-token: ${{ secrets.GH_PAT }}
-        repository: ${{ github.repository }}
+        run-id: ${{ vars.myrun_id }}
         name: UDPInput
         path: UDPInput/build/
 
