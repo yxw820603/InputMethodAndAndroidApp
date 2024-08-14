@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 project(UDPInput)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_INSTALL_PREFIX "/usr")
+# set(CMAKE_INSTALL_PREFIX "/usr")
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/package")  # 修改为本地路径
 
 find_package(Fcitx5Core REQUIRED)
 find_package(Fcitx5Config REQUIRED)
@@ -20,3 +21,5 @@ set(CPACK_PACKAGE_VERSION "1.0.0")
 set(CPACK_PACKAGE_CONTACT "your-email@example.com")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "fcitx5, libfcitx5core7")
+
+set(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_BINARY_DIR}/package;UDPInput;ALL;/")

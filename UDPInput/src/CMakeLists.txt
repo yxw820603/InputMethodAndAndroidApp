@@ -5,7 +5,7 @@ add_library(UDPInput SHARED
 )
 
 target_link_libraries(UDPInput PRIVATE Fcitx5::Core)
-set_target_properties(UDPInput PROPERTIES PREFIX "")
+set_target_properties(UDPInput PROPERTIES PREFIX "") #确保生成的文件不是  libxxx.so,而是xxx.so
 install(TARGETS UDPInput DESTINATION "${FCITX_INSTALL_LIBDIR}/fcitx5")
 
 # target_include_directories(InputMethod PUBLIC fcitx5core fcitx5utils)
