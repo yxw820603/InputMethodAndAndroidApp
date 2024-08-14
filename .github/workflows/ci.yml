@@ -16,7 +16,7 @@ jobs:
     - name: Set up C++ environment
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake libfcitx5core-dev libfcitx5-qt-dev -q
+        sudo apt-get install -y build-essential cmake libfcitx5core-dev libfcitx5-qt-dev cpack dpkg-deb -q
 
     - name: Build C++ project
       run: |
@@ -24,9 +24,17 @@ jobs:
         cd UDPInput
         mkdir -p build
         cd build
-        cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+        cmake ..
         make
+        cpack ..
         pwd
+    - name: Upload .deb to GitHub Release
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./UDPInput/build/UDPInput.deb
+        asset_name: UDPInput.deb
+        asset_content_type: application/octet-stream
 
     - name: SetupJDK
       uses: actions/setup-java@v4
