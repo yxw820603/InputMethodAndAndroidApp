@@ -15,11 +15,13 @@ jobs:
     - name: Get Latest CI Run ID
       id: get_run_id
       run: |
+        workflow_name="Build"
         latest_run=$(curl -H "Accept: application/vnd.github+json" \
-                          -H "Authorization: token ${{ secrets.GH_PAT }}" \
-                          https://api.github.com/repos/${{ github.repository }}/actions/runs \
-                          | jq '.workflow_runs[0].id')
+          -H "Authorization: token ${{ secrets.GH_PAT }}" \
+          "https://api.github.com/repos/${{ github.repository }}/actions/runs" \
+          | jq --arg workflow_name "$workflow_name" '.workflow_runs[] | select(.name == $workflow_name) | .id' | head -n 1)
         echo "run_id=$latest_run" >> $GITHUB_ENV
+        echo "$lastest_run"
 
     - name: Download Build Artifacts
       uses: actions/download-artifact@v4
