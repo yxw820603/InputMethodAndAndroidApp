@@ -14,6 +14,9 @@ jobs:
 
     - name: Download Build Artifacts
       uses: actions/download-artifact@v4
+      with:
+        name: UDPInput
+        path: UDPInput/build/
 
 
     - name: Set up C++ environment
