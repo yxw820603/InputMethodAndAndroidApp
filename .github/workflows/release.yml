@@ -43,7 +43,7 @@ jobs:
     - name: Package C++ project
       run: |
         cd UDPInput/build
-        cpack
+        cpack --debug --verbose
 
     - name: Find generated .deb file
       id: find_deb
