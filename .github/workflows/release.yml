@@ -49,7 +49,7 @@ jobs:
       id: find_deb
       run: |
         # 查找生成的 .deb 文件
-        deb_file=$(find ./UDPInput/build/ -name "*.deb")
+        deb_file=$(find ./UDPInput/build/ -maxdepth 1 -name "*.deb")
         echo "deb_file=$deb_file" >> $GITHUB_ENV
 
     - name: Upload .deb to GitHub Release

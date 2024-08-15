@@ -13,6 +13,10 @@ AndroidApp/build/
 *.gradle
 !build.gradle
 !settings.gradle
+gradle/
+.vscode/
+gradlew
+gradlew.bat
 
 # IDE files
 .idea/
