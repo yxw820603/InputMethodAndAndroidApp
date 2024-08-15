@@ -43,9 +43,7 @@ jobs:
     - name: Package C++ project
       run: |
         cd UDPInput/build
-        make
         cpack
-        /home/runner/work/InputMethodAndAndroidApp/InputMethodAndAndroidApp/UDPInput/build/_CPack_Packages/Linux/DEB/PreinstallOutput.log
 
     - name: Find generated .deb file
       id: find_deb
