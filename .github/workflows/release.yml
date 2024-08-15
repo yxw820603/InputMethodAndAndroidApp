@@ -59,3 +59,5 @@ jobs:
         asset_path: ${{ env.deb_file }}
         asset_name: $(basename ${{ env.deb_file }})
         asset_content_type: application/octet-stream
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
