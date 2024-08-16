@@ -62,3 +62,14 @@ jobs:
     - name: Build Android project
       run: |
         ./gradlew assembleDebug
+
+    - name: Find generated apk file
+      run: |
+        apk_file=$(find . -name "AndroidApp-debug.apk" | head -n 1)
+        echo "apk_file=$apk_file" >> $GITHUB_ENV
+
+    - name: Upload Android Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: AndroidApp
+        path: ${{ env.apk_file }}

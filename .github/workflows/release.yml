@@ -64,3 +64,21 @@ jobs:
         asset_content_type: application/octet-stream
       env:
         GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        github-token: ${{ secrets.GH_PAT }}
+        run-id: ${{ env.run_id }}
+        name: AndroidApp
+        path: ./
+
+    - name: Upload .deb to GitHub Release
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./AndroidApp-debug.apk
+        asset_name: AndroidApp-debug.apk
+        asset_content_type: application/octet-stream
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
